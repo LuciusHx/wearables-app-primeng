@@ -8,4 +8,30 @@
   <section>
     <app-search-filter></app-search-filter>
   </section>
+
+  <section>
+    
+    <h3 class="text-2xl font-bold text-gray-900 m-10 my-8 px-4 sm:px-6 lg:px-10">X produtos encontrados</h3>
+    <div class="flex flex-wrap gap-7 justify-center">
+      <p-card
+        *ngFor="let product of products"
+        [style]="{ width: '25rem', overflow: 'hidden' }"
+      >
+        <ng-template #header>
+          <img
+            alt="Card"
+            class="w-full"
+            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+          />
+        </ng-template>
+        <ng-template #subtitle>{{ product.name }}</ng-template>
+        <ng-template #title>R${{ product.price }}</ng-template>
+        
+        <div class="flex justify-between">
+          <div>{{product.category}}</div>
+          <div>Disponíveis: <label>{{product | totalStock}}</label></div>
+        </div>
+      </p-card>
+    </div>
+  </section>
 </ng-content>
