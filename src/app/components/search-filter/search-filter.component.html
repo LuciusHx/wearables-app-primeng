@@ -1,0 +1,24 @@
+<div class="px-4 sm:px-6 lg:px-8 py-4">
+  <p-card>
+    <p-fluid class="flex py-2 gap-2">
+      <p-inputgroup class="">
+        <input pInputText placeholder="Pesquisar" />
+        <p-inputgroup-addon>
+          <p-button
+            icon="pi pi-search"
+            severity="secondary"
+            (click)="onFilterApply()"
+          />
+        </p-inputgroup-addon>
+      </p-inputgroup>
+
+      <p-select
+        [options]="categories"
+        [(ngModel)]="selectedCategories"
+        placeholder="Filtro"
+        class="w-full md:w-56"
+      />
+      <p-button label="Buscar" severity="secondary"/>
+    </p-fluid>
+  </p-card>
+</div>
