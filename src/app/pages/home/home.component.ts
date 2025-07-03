@@ -1,28 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../../models/product.model';
+import { TotalStockPipe } from '../../pipes/total-stock.pipe';
+
+import { DataView } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+import { SelectButton } from 'primeng/selectbutton';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from '../../components/header/header.component';
 import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-import { CommonModule } from '@angular/common';
-import { TotalStockPipe } from '../../pipes/total-stock.pipe';
 
 @Component({
   selector: 'app-home',
   imports: [
-    HeaderComponent,
     SearchFilterComponent,
-    CardModule,
+    HeaderComponent,
+    DataView,
     ButtonModule,
+    CommonModule,
+    SelectButton,
+    FormsModule,
     CommonModule,
     TotalStockPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  layout: 'grid' | 'list' = 'grid';
+  options = ['list', 'grid'];
+
   products: Product[] = [
     {
       name: 'Camiseta Slim',
@@ -121,5 +130,36 @@ export class HomeComponent {
       ],
     },
   ];
+  // ========= filtro =========
+  filteredProducts = [...this.products];
+  searchTerm = '';
+  selectedCategories: string[] = [];
 
+  handleSearch(term: string) {
+    this.searchTerm = term.toLowerCase();
+    this.applyFilters();
+  }
+
+  handleCategoryChange(categories: string[]) {
+    this.selectedCategories = categories;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesSearch =
+        !this.searchTerm ||
+        product.name.toLowerCase().includes(this.searchTerm) ||
+        product.category.toLowerCase().includes(this.searchTerm);
+
+      const matchesCategory =
+        this.selectedCategories.length === 0 ||
+        this.selectedCategories.includes(product.category);
+
+      return matchesSearch && matchesCategory;
+    });
+  }
+  ngOnInit() {
+    this.applyFilters();
+  }
 }

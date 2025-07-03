@@ -1,8 +1,14 @@
-<div class="px-4 sm:px-6 lg:px-10 py-4">
+<div class="px-4 sm:px-6 lg:px-10 py-5">
   <p-card>
     <p-fluid class="flex py-2 gap-4">
-      <p-inputgroup class="">
-        <input pInputText placeholder="Pesquisar" />
+      <p-inputgroup>
+        <input
+          pInputText
+          placeholder="Pesquisar"
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange($event)"
+          (keyup.enter)="onFilterApply()"
+        />
         <p-inputgroup-addon>
           <p-button
             icon="pi pi-search"
@@ -15,10 +21,18 @@
       <p-select
         [options]="categories"
         [(ngModel)]="selectedCategories"
+        (onChange)="onCategoryChange($event)"
         placeholder="Filtro"
+        [showClear]="true"
         class="w-full md:w-56"
       />
-      <p-button label="Buscar" severity="secondary"/>
+
+      <p-button label="Buscar" severity="secondary" (click)="onFilterApply()" />
     </p-fluid>
   </p-card>
+  <div class="mt-2">
+    <p-button icon="pi pi-times" label="Remover Filtros" variant="text" severity="danger" size="small" 
+    *ngIf="showResetButton"
+    (click)="resetFilters()"/>
+  </div>
 </div>
