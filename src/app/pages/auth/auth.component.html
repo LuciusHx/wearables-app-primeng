@@ -1,0 +1,64 @@
+<ng-content>
+  <app-header></app-header>
+
+  <p-button icon="pi pi-arrow-left" label="Voltar" variant="text" severity="contrast" routerLink="/"/>
+  <div class="flex justify-center mt-20">
+    <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4 w-full sm:w-56"
+    >
+      <div class="flex flex-col gap-1">
+        <input
+          pInputText
+          type="text"
+          id="username"
+          placeholder="Email"
+          [formControl]="form.controls.email"
+        />
+        <div
+          *ngIf="form.controls.email.errors && form.controls.email.touched"
+          class="text-red-600 text-xs"
+        >
+          <div *ngIf="form.controls.email.errors?.['required']">
+            Esse campo é obrigatório!
+          </div>
+          <div *ngIf="form.controls.email.errors?.['email']">
+            Insira um email válido!
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <input
+          pInputText
+          type="email"
+          id="email"
+          placeholder="Senha"
+          [formControl]="form.controls.password"
+        />
+        <div
+          *ngIf="
+            form.controls.password.errors && form.controls.password.touched
+          "
+          class="text-red-600 text-xs"
+        >
+          <div *ngIf="form.controls.password.errors?.['required']">
+            Esse campo é obrigatório!
+          </div>
+          <div *ngIf="form.controls.password.errors?.['minlength']">
+            A senha deve ter pelo menos 8 caracteres.
+          </div>
+        </div>
+      </div>
+      <button
+        pButton
+        severity="contrast"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="(onSubmit)"
+      >
+        <span pButtonLabel> Entrar </span>
+      </button>
+    </form>
+  </div>
+</ng-content>

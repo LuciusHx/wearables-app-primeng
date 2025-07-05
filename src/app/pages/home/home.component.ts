@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RouterLink } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { TotalStockPipe } from '../../pipes/total-stock.pipe';
 
@@ -12,11 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
 
+const COMPONENTS = [SearchFilterComponent, HeaderComponent];
+
 @Component({
   selector: 'app-home',
   imports: [
-    SearchFilterComponent,
-    HeaderComponent,
+    COMPONENTS,
     DataView,
     ButtonModule,
     CommonModule,
@@ -24,6 +26,7 @@ import { SearchFilterComponent } from '../../components/search-filter/search-fil
     FormsModule,
     CommonModule,
     TotalStockPipe,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -34,6 +37,7 @@ export class HomeComponent implements OnInit {
 
   products: Product[] = [
     {
+      id: '1',
       name: 'Camiseta Slim',
       price: 89.9,
       discount: 10,
@@ -46,6 +50,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '2',
       name: 'Calça Jeans Skinny',
       price: 159.9,
       discount: 15,
@@ -58,6 +63,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '3',
       name: 'Blazer Slim Fit',
       price: 299.9,
       discount: 20,
@@ -70,6 +76,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '4',
       name: 'Vestido Midi Floral',
       price: 179.9,
       discount: 12,
@@ -82,6 +89,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '5',
       name: 'Tênis Casual',
       price: 249.9,
       discount: 25,
@@ -94,6 +102,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '6',
       name: 'Moletom com Capuz',
       price: 129.9,
       discount: 10,
@@ -106,6 +115,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '7',
       name: 'Shorts de Praia',
       price: 69.9,
       discount: 5,
@@ -118,6 +128,7 @@ export class HomeComponent implements OnInit {
       ],
     },
     {
+      id: '8',
       name: 'Saia Plissada',
       price: 99.9,
       discount: 8,
@@ -130,6 +141,7 @@ export class HomeComponent implements OnInit {
       ],
     },
   ];
+
   // ========= filtro =========
   filteredProducts = [...this.products];
   searchTerm = '';
@@ -159,6 +171,7 @@ export class HomeComponent implements OnInit {
       return matchesSearch && matchesCategory;
     });
   }
+
   ngOnInit() {
     this.applyFilters();
   }
