@@ -165,6 +165,7 @@ export class HomeComponent implements OnInit {
         product.category.toLowerCase().includes(this.searchTerm);
 
       const matchesCategory =
+        !this.selectedCategories ||
         this.selectedCategories.length === 0 ||
         this.selectedCategories.includes(product.category);
 

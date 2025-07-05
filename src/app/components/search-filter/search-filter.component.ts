@@ -32,7 +32,7 @@ export class SearchFilterComponent {
   @Output() filterApply = new EventEmitter<void>();
 
   searchTerm: string = '';
-  selectedCategories: any;
+  selectedCategories: any | null;
   categories = ['Masculina', 'Feminina', 'Unissex'];
 
   showResetButton: boolean = false;
@@ -45,26 +45,9 @@ export class SearchFilterComponent {
   onCategoryChange(event: { value: string[] }) {
     this.selectedCategories = event.value;
     this.categoryChange.emit(this.selectedCategories);
-    this.checkFilters();
   }
 
   onFilterApply() {
     this.filterApply.emit();
-  }
-
-  resetFilters() {
-    this.selectedCategories = [];
-    this.searchTerm = '';
-    this.showResetButton = false;
-
-    // Emitir os valores resetados
-    this.searchChange.emit('');
-    this.categoryChange.emit([]);
-  }
-
-  private checkFilters() {
-    // Mostra o botão se houver qualquer filtro ativo
-    this.showResetButton =
-      this.selectedCategories.length > 0 || !!this.searchTerm;
   }
 }
