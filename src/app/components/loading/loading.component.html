@@ -1,0 +1,7 @@
+<div class="spinner" *ngIf="this.loadingService.loading$ | async">
+  <p-progress-spinner
+    styleClass="p-spinner"
+    [style]="{ width: '80px', height: '80px', stroke: '#3B82F6' }"
+    strokeWidth="4"
+  />
+</div>

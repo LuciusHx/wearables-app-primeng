@@ -14,7 +14,7 @@
   </section>
 
   <section>
-    <div class="px-4 sm:px-6 lg:px-12">
+    <div class="px-4 sm:px-6 lg:px-12" *ngIf="!isLoading">
       <p-dataview #dv [value]="products" [layout]="layout">
         <ng-template #header>
           <div class="flex justify-between items-baseline">
@@ -52,10 +52,7 @@
               <div class="md:w-40 relative">
                 <img
                   class="block xl:block mx-auto rounded w-full"
-                  [src]="
-                    'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                    product
-                  "
+                  [src]="product.productImage"
                   [alt]="product.name"
                 />
               </div>
@@ -68,7 +65,7 @@
                   <div>
                     <span
                       class="font-medium text-surface-500 dark:text-surface-400 text-sm"
-                      >{{ product.category }}</span
+                      >{{ product.category.name }}</span
                     >
                     <div class="text-lg font-medium mt-2">
                       {{ product.name }}
@@ -94,6 +91,13 @@
                     product.price | currency : "BRL"
                   }}</span>
                   <div class="flex flex-col gap-2">
+                    <p-button
+                      icon="pi pi-eye"
+                      label="Ver detalhes"
+                      variant="outlined"
+                      severity="contrast"
+                      [routerLink]="'/product-detail/' + product.id"
+                    />
                     <button
                       pButton
                       icon="pi pi-shopping-cart"
@@ -101,13 +105,6 @@
                       severity="contrast"
                       class="flex-auto md:flex-initial whitespace-nowrap"
                     ></button>
-                    <p-button
-                        icon="pi pi-eye"
-                        label="Ver detalhes"
-                        variant="outlined"
-                        severity="contrast"
-                        [routerLink]="'/product-detail/' + product.id"
-                      />
                   </div>
                 </div>
               </div>
@@ -127,10 +124,7 @@
                   <div class="relative mx-auto">
                     <img
                       class="rounded w-full"
-                      [src]="
-                        'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                        product
-                      "
+                      [src]="product.productImage"
                       [alt]="product.name"
                       style="max-width: 300px"
                     />
@@ -143,7 +137,7 @@
                     <div>
                       <span
                         class="font-medium text-surface-500 dark:text-surface-400 text-sm"
-                        >{{ product.category }}</span
+                        >{{ product.category.name }}</span
                       >
                       <div class="text-lg font-medium mt-1">
                         {{ product.name }}
@@ -182,5 +176,86 @@
         </ng-template>
       </p-dataview>
     </div>
+
+    <!-- ====== SKELETON ====== -->
+    <p-dataview #dv [value]="products" [layout]="layout" *ngIf="isLoading">
+      <ng-template #header>
+        <div class="flex justify-end">
+          <p-selectbutton
+            [(ngModel)]="layout"
+            [options]="options"
+            [allowEmpty]="false"
+          >
+            <ng-template #item let-option>
+              <i [class]="option === 'list' ? 'pi pi-bars' : 'pi pi-table'"></i>
+            </ng-template>
+          </p-selectbutton>
+        </div>
+      </ng-template>
+      <ng-template #list let-items>
+        <div class="flex flex-col">
+          <div *ngFor="let i of [1, 1, 1, 1, 1, 1]; let first = first">
+            <div
+              class="flex flex-col xl:flex-row xl:items-start p-6 gap-6"
+              [ngClass]="{
+                'border-t border-surface-200 dark:border-surface-700': !first
+              }"
+            >
+              <p-skeleton class="!w-9/12 sm:!w-64 xl:!w-40 !h-24 mx-auto" />
+              <div
+                class="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-6"
+              >
+                <div class="flex flex-col items-center sm:items-start gap-4">
+                  <p-skeleton width="8rem" height="2rem" />
+                  <p-skeleton width="6rem" height="1rem" />
+
+                  <div class="flex items-center gap-4">
+                    <p-skeleton width="6rem" height="1rem" />
+                    <p-skeleton width="3rem" height="1rem" />
+                  </div>
+                </div>
+                <div
+                  class="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-2"
+                >
+                  <p-skeleton width="4rem" height="2rem" />
+                  <p-skeleton size="3rem" shape="circle" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #grid let-items>
+        <div class="grid grid-cols-12 gap-4">
+          <div
+            *ngFor="let i of [1, 1, 1, 1, 1, 1]; let first = first"
+            class="col-span-12 sm:col-span-6 xl:col-span-4 p-2"
+          >
+            <div
+              class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded"
+            >
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <p-skeleton width="6rem" height="2rem" />
+                <p-skeleton width="3rem" height="1rem" />
+              </div>
+              <div class="flex flex-col items-center gap-4 py-8">
+                <p-skeleton height="10rem" class="w-3/4" class="w-3/4" />
+                <p-skeleton width="8rem" height="2rem" />
+                <p-skeleton width="6rem" height="1rem" />
+              </div>
+              <div class="flex items-center justify-between">
+                <p-skeleton width="4rem" height="2rem" />
+                <p-skeleton
+                  width="6rem"
+                  height="1rem"
+                  shape="circle"
+                  size="3rem"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataview>
   </section>
 </ng-content>
