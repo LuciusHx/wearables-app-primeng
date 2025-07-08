@@ -12,7 +12,8 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +24,7 @@ import { RouterLink } from '@angular/router';
     InputTextModule,
     ButtonModule,
     CommonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
@@ -37,9 +38,22 @@ export class AuthComponent {
     ]),
   });
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      const { email, password } = this.form.value;
+      this.authService.login({ email: email!, password: password! }).subscribe({
+        next: (response) => {
+          
+          localStorage.setItem('auth_token', response.token);
+
+          this.router.navigate(['/admin']);
+        },
+        error: (err) => {
+          console.error('Erro no login:', err);
+        },
+      });
     }
   }
 }

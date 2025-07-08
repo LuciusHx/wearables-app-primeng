@@ -1,5 +1,3 @@
-// product.model.ts
-
 export interface Size {
   id: string;
   label: string;

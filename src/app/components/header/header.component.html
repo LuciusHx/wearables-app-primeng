@@ -8,8 +8,13 @@
     </ng-template>
 
     <ng-template #end>
-      <div *ngIf="!isAdmin" class="flex items-center gap-2" >
-        <p-button label="Área do Admin" severity="contrast" size="small" routerLink="/auth"/>
+      <div *ngIf="!isAdmin" class="flex items-center gap-2">
+        <p-button
+          label="Área do Admin"
+          severity="contrast"
+          size="small"
+          routerLink="/dashboard"
+        />
       </div>
     </ng-template>
   </p-toolbar>
