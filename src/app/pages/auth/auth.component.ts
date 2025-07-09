@@ -34,21 +34,26 @@ export class AuthComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
+      Validators.minLength(6),
     ]),
   });
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    if (this.authService.isLogged()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (response) => {
-          
           localStorage.setItem('auth_token', response.token);
 
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.error('Erro no login:', err);

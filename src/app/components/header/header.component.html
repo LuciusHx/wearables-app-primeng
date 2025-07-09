@@ -8,13 +8,17 @@
     </ng-template>
 
     <ng-template #end>
+      <!-- se não for admin, o botao aparece -->
       <div *ngIf="!isAdmin" class="flex items-center gap-2">
         <p-button
-          label="Área do Admin"
-          severity="contrast"
-          size="small"
-          routerLink="/dashboard"
+        label="Área do Admin"
+        severity="contrast"
+        size="small"
+        [routerLink]="'/auth'"
         />
+      </div>
+      <div *ngIf="isLogged && isAdmin">
+        <p-button icon="pi pi-sign-out" severity="danger" (onClick)="logout()"/>
       </div>
     </ng-template>
   </p-toolbar>
