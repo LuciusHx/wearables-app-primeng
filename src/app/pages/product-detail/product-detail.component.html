@@ -1,10 +1,16 @@
 <ng-content>
   <app-header [isAdmin]="false"></app-header>
 
-  <section>
-    <p-card header="">
-        <h1>{{id}}</h1>
-      <p class="m-0">Lorem ipsum dolor sit amet...</p>
-    </p-card>
-  </section>
+  <div class="flex gap-15 px-10 py-5 h-120 justify-center">
+    <div>
+      <img
+        [src]="product?.productImage"
+        [alt]="product?.name"
+        class="max-w-full max-h-full object-contain"
+      />
+    </div>
+    <div class="border border-zinc-400 rounded-md w-80 p-5">
+      <h3 class="font-extrabold">{{ product?.name }}</h3>
+    </div>
+  </div> 
 </ng-content>
