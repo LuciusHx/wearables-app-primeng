@@ -10,7 +10,7 @@ export interface ProductSize {
 
 export interface User {
   name: string;
-  avatarUrl: string | null;
+  avatarUrl?: string;
 }
 
 export interface Category {

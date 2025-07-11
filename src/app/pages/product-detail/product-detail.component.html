@@ -1,16 +1,59 @@
-<ng-content>
-  <app-header [isAdmin]="false"></app-header>
+<app-header [isAdmin]="false"></app-header>
 
-  <div class="flex gap-15 px-10 py-5 h-120 justify-center">
+<div class="flex gap-15 px-10 py-5 h-120 justify-center">
+  <div class="w-170">
+    <img
+      [src]="product?.productImage"
+      [alt]="product?.name"
+      class="max-w-full max-h-full object-contain"
+    />
+  </div>
+  <div class="border border-zinc-400 rounded-md w-80 p-5 flex flex-col gap-1">
     <div>
-      <img
-        [src]="product?.productImage"
-        [alt]="product?.name"
-        class="max-w-full max-h-full object-contain"
-      />
+      <h3 class="font-semibold text-xl">
+        {{ product?.name }} MONTANA 1.2 TURBO FLEX PREMIER AUTOMÁTICO
+      </h3>
+
+      <p class="font-light text-sm">{{ product?.category?.name }}</p>
     </div>
-    <div class="border border-zinc-400 rounded-md w-80 p-5">
-      <h3 class="font-extrabold">{{ product?.name }}</h3>
+    <p-divider />
+    <div>
+      <span
+        ><s>{{ product?.discount | currency : "BRL" }}</s></span
+      >
+      <h3 class="font-bold text-2xl">
+        {{ product?.price | currency : "BRL" }}
+      </h3>
     </div>
-  </div> 
-</ng-content>
+
+    <div class="flex flex-col h-full justify-end">
+      <div class="flex flex-col gap-5">
+        <p-selectbutton
+          class="text-sm justify-center"
+          [options]="sizeOptions"
+          [(ngModel)]="selectedSize"
+          optionLabel="label"
+          optionValue="size"
+        >
+          <ng-template let-size pTemplate="item">
+            <div class="flex items-center gap-2">
+              <span>{{ size.label }}</span>
+              <span class="text-xs">({{ size.stock }})</span>
+            </div>
+          </ng-template>
+        </p-selectbutton>
+        <button
+          pButton
+          icon="pi pi-whatsapp"
+          label="Comprar"
+          severity="contrast"
+        ></button>
+      </div>
+      <p-divider />
+      <div class="flex gap-2">
+        <p-avatar [image]="product?.registredBy?.avatarUrl" shape="circle" />
+        <p class="mt-1">{{ product?.registredBy?.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
