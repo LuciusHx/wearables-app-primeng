@@ -38,7 +38,7 @@
           <ng-template let-size pTemplate="item">
             <div class="flex items-center gap-2">
               <span>{{ size.label }}</span>
-              <span class="text-xs">({{ size.stock }})</span>
+              <span class="text-xs font-light">({{ size.stock }})</span>
             </div>
           </ng-template>
         </p-selectbutton>
@@ -47,6 +47,7 @@
           icon="pi pi-whatsapp"
           label="Comprar"
           severity="contrast"
+          [disabled]="!selectedSize"
         ></button>
       </div>
       <p-divider />

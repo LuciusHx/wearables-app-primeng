@@ -1,23 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Toolbar } from 'primeng/toolbar';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-header',
-  imports: [
-    Toolbar,
-    AvatarModule,
-    ButtonModule,
-    CommonModule,
-    MenubarModule,
-  ],
+  imports: [Toolbar, AvatarModule, ButtonModule, CommonModule, MenubarModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -26,7 +20,7 @@ export class HeaderComponent {
   items: MenuItem[] | undefined;
   isLogged: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
     this.isLogged = this.authService.isLogged();
   }
 
@@ -35,16 +29,12 @@ export class HeaderComponent {
       {
         label: 'Home',
         icon: 'pi pi-home',
-        command: () => {
-          this.router.navigate(['/']);
-        },
+        routerLink: '/',
       },
       {
         label: 'Área do Admin',
         icon: 'pi pi-crown',
-        command: () => {
-          this.router.navigate(['/auth']);
-        },
+        routerLink: '/auth',
       },
       {
         label: 'Contato',

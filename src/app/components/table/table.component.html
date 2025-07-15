@@ -1,0 +1,55 @@
+<p-table
+  [value]="data"
+  [loading]="loading"
+  [paginator]="paginator"
+  [rows]="rows"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [showCurrentPageReport]="showCurrentPageReport"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+  [selectionMode]="selectionMode"
+  [(selection)]="selectedRow"
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect($event)"
+  (onSort)="onSort($event)"
+  styleClass="p-datatable-striped p-datatable-gridlines"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th
+        *ngFor="let col of columns"
+        [pSortableColumn]="col.sortable ? col.field : ''"
+      >
+        {{ col.header }}
+        <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+      </th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData>
+    <tr [pSelectableRow]="selectionMode ? rowData : null">
+      <td *ngFor="let col of columns">
+        {{ getCellValue(rowData, col) }}
+      </td>
+      <td>
+        <p-menu
+          #menu
+          [model]="itemsMenuTable"
+          [popup]="true"
+          [appendTo]="'body'"
+          [style]="{
+            'min-width': '120px',
+            }"
+        />
+        <p-button
+          (click)="menu.toggle($event)"
+          icon="pi pi-ellipsis-v"
+          size="small"
+          severity="contrast"
+        />
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorleft" *ngIf="paginator">
+    <div class="text-sm text-gray-600">Total: {{ data?.length || 0 }}</div>
+  </ng-template>
+</p-table>

@@ -54,6 +54,7 @@
                   class="block xl:block mx-auto rounded w-full"
                   [src]="product.productImage"
                   [alt]="product.name"
+                  loading="lazy"
                 />
               </div>
               <div
@@ -127,6 +128,7 @@
                       [src]="product.productImage"
                       [alt]="product.name"
                       style="max-width: 300px"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -135,10 +137,13 @@
                     class="flex flex-row justify-between products-start gap-2"
                   >
                     <div>
-                      <span
-                        class="font-medium text-surface-500 dark:text-surface-400 text-sm"
-                        >{{ product.category.name }}</span
-                      >
+                      <div class="flex gap-26">
+                        <span
+                          class="font-medium text-surface-500 dark:text-surface-400 text-sm"
+                          >{{ product.category.name }}</span
+                        >
+                        <span>Disponível: {{ product | totalStock }}</span>
+                      </div>
                       <div class="text-lg font-medium mt-1">
                         {{ product.name }}
                       </div>
@@ -152,6 +157,7 @@
                     <span class="text-2xl font-semibold">{{
                       product.price | currency : "BRL"
                     }}</span>
+
                     <div class="flex gap-2">
                       <button
                         pButton

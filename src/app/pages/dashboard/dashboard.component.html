@@ -1,1 +1,25 @@
 <app-header></app-header>
+
+<div class="flex px-10">
+  <p-menu [model]="itemsMenu" class="mt-5 mr-5" />
+
+  <p-divider layout="vertical" />
+  <section class="w-full">
+    <app-table
+      [data]="products"
+      [columns]="columns"
+      [paginator]="true"
+      [rows]="5"
+      [selectionMode]="'single'"
+      (rowSelect)="onRowSelect($event)"
+    ></app-table>
+    <div *ngIf="loading" class="p-4 text-center">
+      <p class="mt-2">Carregando produtos...</p>
+    </div>
+
+    <div *ngIf="!loading && products.length === 0" class="p-4 text-center">
+      <p>Nenhum produto encontrado.</p>
+      <button pButton label="Recarregar" (click)="loadProducts()"></button>
+    </div>
+  </section>
+</div>
