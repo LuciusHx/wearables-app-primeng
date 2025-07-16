@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HeaderComponent } from '../../components/header/header.component';
-
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -26,7 +24,7 @@ const NgPrimeComponents = [
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgPrimeComponents, HeaderComponent, CommonModule, FormsModule],
+  imports: [NgPrimeComponents, CommonModule, FormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })

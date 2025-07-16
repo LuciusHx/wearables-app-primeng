@@ -1,0 +1,60 @@
+<div class="m-15">
+  <form [formGroup]="form" class="flex flex-col justify-center">
+    <h2 class="font-bold text-2xl mb-10">Cadastro de Produtos</h2>
+
+    <p-fluid>
+      <div class="grid grid-cols-2 gap-5">
+        <app-custom-input
+          [control]="form.controls.name"
+          type="text"
+          label="Nome"
+        ></app-custom-input>
+        <app-custom-input
+          [control]="form.controls.category"
+          type="text"
+          label="Categoria"
+        ></app-custom-input>
+      </div>
+
+      <div class="grid grid-cols-4 gap-5">
+        <div class="flex flex-col gap-2">
+            <label>Preço</label>
+            <p-inputnumber
+              formControlName="price"
+              inputId="currency-us"
+              mode="currency"
+              currency="BRL"
+              locale="pt-br"
+              class="h-10.5"
+            />
+        </div>
+        <app-custom-input
+          [control]="form.controls.discount"
+          type="text"
+          label="Desconto"
+        ></app-custom-input>
+        <div></div>
+      </div>
+
+      <app-custom-input
+        [control]="form.controls.description"
+        type="text"
+        label="Descrição"
+        class="w-full"
+      ></app-custom-input>
+      <div class="grid grid-cols-4 mt-5">
+        <p-fileupload
+          #fu
+          mode="basic"
+          chooseLabel="Browse"
+          chooseIcon="pi pi-upload"
+          accept="image/*"
+          maxFileSize="1000000"
+          (onUpload)="onUpload($event)"
+          class="col-start-1"
+        />
+        <p-button label="Cadastrar" class="col-span-3" type="submit" />
+      </div>
+    </p-fluid>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Toolbar } from 'primeng/toolbar';
@@ -16,7 +16,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  @Input() isAdmin: boolean = true;
   items: MenuItem[] | undefined;
   isLogged: boolean = false;
 

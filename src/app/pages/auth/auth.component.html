@@ -1,14 +1,19 @@
 <ng-content>
-  <app-header></app-header>
-
-  <p-button icon="pi pi-arrow-left" label="Voltar" variant="text" severity="contrast" routerLink="/"/>
+  <p-button
+    icon="pi pi-arrow-left"
+    label="Voltar"
+    variant="text"
+    severity="contrast"
+    routerLink="/"
+  />
   <div class="flex justify-center mt-20">
     <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    class="flex flex-col gap-4 w-full sm:w-56"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4 w-full sm:w-56"
     >
       <div class="flex flex-col gap-1">
+        <app-custom-input></app-custom-input>
         <input
           pInputText
           type="text"

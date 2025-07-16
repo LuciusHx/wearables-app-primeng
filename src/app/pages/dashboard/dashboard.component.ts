@@ -6,7 +6,6 @@ import { MenuItem } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
 
 import { AuthService } from '../../services/auth.service';
-import { HeaderComponent } from '../../components/header/header.component';
 import { TableComponent } from '../../components/table/table.component';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product.model';
@@ -17,14 +16,22 @@ const NgComponents = [ButtonModule, MenuModule, DividerModule];
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgComponents, CommonModule, HeaderComponent, TableComponent],
+  imports: [NgComponents, CommonModule, TableComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   itemsMenu: MenuItem[] = [
-    { label: 'Novo Produto', icon: 'pi pi-plus', routerLink: '/' },
-    { label: 'Novo Usuário', icon: 'pi pi-user-plus', routerLink: '/' },
+    {
+      label: 'Novo Produto',
+      icon: 'pi pi-plus',
+      routerLink: '/create-product',
+    },
+    {
+      label: 'Novo Usuário',
+      icon: 'pi pi-user-plus',
+      routerLink: '/create-user',
+    },
   ];
   products: Product[] = [];
 
@@ -70,6 +77,6 @@ export class DashboardComponent {
 
   onRowSelect(event: any) {
     console.log('Selected row:', event.data);
-     this.router.navigate(['/product-detail', event.data.id])
+    this.router.navigate(['/product-detail', event.data.id]);
   }
 }
