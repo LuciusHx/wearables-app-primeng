@@ -2,14 +2,9 @@ import { Routes } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
 
-import { HomeComponent } from './pages/home/home.component';
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
-import { AuthComponent } from './pages/auth/auth.component';
 import { ClientComponent } from './layout/client/client.component';
 import { AdminComponent } from './layout/admin/admin.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CreateUserComponent } from './pages/user/create-user/create-user.component';
-import { CreateProductComponent } from './pages/product/create-product/create-product.component';
+
 
 export const routes: Routes = [
   //client
@@ -17,9 +12,23 @@ export const routes: Routes = [
     path: '',
     component: ClientComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'product-detail/:id', component: ProductDetailComponent },
-      { path: 'auth', component: AuthComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/home/home.component').then((m) => m.HomeComponent),
+      },
+      {
+        path: 'product-detail/:id',
+        loadComponent: () =>
+          import('./pages/product-detail/product-detail.component').then(
+            (m) => m.ProductDetailComponent
+          ),
+      },
+      {
+        path: 'auth',
+        loadComponent: () =>
+          import('./pages/auth/auth.component').then((m) => m.AuthComponent),
+      },
     ],
   },
   //admin
@@ -27,9 +36,27 @@ export const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'create-user', component: CreateUserComponent },
-      { path: 'create-product', component: CreateProductComponent }
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+      },
+      {
+        path: 'create-user',
+        loadComponent: () =>
+          import('./pages/user/create-user/create-user.component').then(
+            (m) => m.CreateUserComponent
+          ),
+      },
+      {
+        path: 'create-product',
+        loadComponent: () =>
+          import(
+            './pages/product/create-product/create-product.component'
+          ).then((m) => m.CreateProductComponent),
+      },
     ],
     canActivate: [AuthGuard],
   },
