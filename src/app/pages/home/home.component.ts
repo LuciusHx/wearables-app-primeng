@@ -11,12 +11,10 @@ import { SelectButton } from 'primeng/selectbutton';
 import { CommonModule } from '@angular/common';
 import { Skeleton } from 'primeng/skeleton';
 
-import { HeaderComponent } from '../../components/header/header.component';
 import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
 
 import { ProductsService } from '../../services/products.service';
 
-const COMPONENTS = [SearchFilterComponent, HeaderComponent];
 const NgPrimeComponents = [
   ButtonModule,
   SelectButton,
@@ -28,8 +26,8 @@ const NgPrimeComponents = [
 @Component({
   selector: 'app-home',
   imports: [
-    COMPONENTS,
     NgPrimeComponents,
+    SearchFilterComponent,
     CommonModule,
     RouterLink,
     FormsModule,

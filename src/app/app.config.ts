@@ -8,7 +8,9 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+
 import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { authInterceptor } from './interceptors/auth-headers.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -24,7 +26,8 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptors([loadingInterceptor, authInterceptor])),
+    
 
   ],
 };

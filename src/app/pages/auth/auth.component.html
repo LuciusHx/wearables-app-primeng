@@ -13,7 +13,7 @@
       class="flex flex-col gap-4 w-full sm:w-56"
     >
       <div class="flex flex-col gap-1">
-        <app-custom-input></app-custom-input>
+        
         <input
           pInputText
           type="text"
@@ -60,7 +60,7 @@
         severity="contrast"
         type="submit"
         [disabled]="form.invalid"
-        (click)="(onSubmit)"
+        (onClick)="onSubmit()"
       >
         <span pButtonLabel> Entrar </span>
       </button>

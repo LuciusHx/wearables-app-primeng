@@ -20,6 +20,6 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    return !!localStorage.getItem('auth_token')
+    return !!localStorage.getItem('auth_token');
   }
 }

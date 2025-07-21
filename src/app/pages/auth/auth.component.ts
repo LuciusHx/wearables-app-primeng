@@ -10,9 +10,9 @@ import {
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { CustomInputComponent } from "../../components/custom-input/custom-input.component";
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +23,6 @@ import { CustomInputComponent } from "../../components/custom-input/custom-input
     ButtonModule,
     CommonModule,
     RouterLink,
-    CustomInputComponent
 ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',

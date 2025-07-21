@@ -76,7 +76,6 @@ export class DashboardComponent {
   }
 
   onRowSelect(event: any) {
-    console.log('Selected row:', event.data);
     this.router.navigate(['/product-detail', event.data.id]);
   }
 }

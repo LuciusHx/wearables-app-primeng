@@ -22,7 +22,7 @@
         {{ col.header }}
         <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
       </th>
-      <th>Ações</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
@@ -50,6 +50,6 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft" *ngIf="paginator">
-    <div class="text-sm text-gray-600">Total: {{ data?.length || 0 }}</div>
+    <div class="text-sm text-gray-600">Total: {{ data.length || 0 || null}}</div>
   </ng-template>
 </p-table>
