@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +24,7 @@ import { AuthService } from '../../services/auth.service';
     ButtonModule,
     CommonModule,
     RouterLink,
-],
+  ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
@@ -36,7 +37,11 @@ export class AuthComponent {
     ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
     if (this.authService.isLogged()) {
@@ -49,12 +54,27 @@ export class AuthComponent {
       const { email, password } = this.form.value;
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (response) => {
-          localStorage.setItem('auth_token', response.token);
-
-          this.router.navigate(['/dashboard']);
+          this.utilsService.setElementInLocalStorage(
+            'auth_token',
+            response.token
+          );
+          this.utilsService.setElementInLocalStorage('user', response.user.id);
+          this.utilsService.presentToast(
+            'success',
+            'Sucesso',
+            'Login efetuado com sucesso!',
+            4000
+          );
+          this.router.navigateByUrl('/dashboard');
         },
         error: (err) => {
           console.error('Erro no login:', err);
+          this.utilsService.presentToast(
+            'error',
+            'Erro',
+            'Não foi possível concluir o login!',
+            5000
+          );
         },
       });
     }

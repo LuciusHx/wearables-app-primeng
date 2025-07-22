@@ -11,6 +11,7 @@ import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
 
 const NgComponents = [ButtonModule, MenuModule, DividerModule];
 
@@ -50,11 +51,16 @@ export class DashboardComponent {
   constructor(
     private authService: AuthService,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit() {
     this.loadProducts();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   loadProducts(): void {
@@ -71,11 +77,9 @@ export class DashboardComponent {
     });
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
   onRowSelect(event: any) {
     this.router.navigate(['/product-detail', event.data.id]);
   }
+
+  deleteProduct() {}
 }

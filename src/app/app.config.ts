@@ -11,23 +11,22 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { authInterceptor } from './interceptors/auth-headers.interceptor';
-
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: Aura,
-        options: {  
-          darkModeSelector: '.my-app-dark',        
+        options: {
+          darkModeSelector: '.my-app-dark',
         },
       },
     }),
     provideHttpClient(withInterceptors([loadingInterceptor, authInterceptor])),
-    
-
   ],
 };
