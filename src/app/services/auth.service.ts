@@ -20,8 +20,9 @@ export class AuthService {
   }
 
   logout(): void {
-    this.utilsService.removeElementFromLocalStorage('auth_token');
-    this.utilsService.removeElementFromLocalStorage('user');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
+
     this.router.navigateByUrl('/');
     this.utilsService.presentToast(
       'error',

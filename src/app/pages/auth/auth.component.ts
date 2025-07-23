@@ -54,11 +54,9 @@ export class AuthComponent {
       const { email, password } = this.form.value;
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (response) => {
-          this.utilsService.setElementInLocalStorage(
-            'auth_token',
-            response.token
-          );
-          this.utilsService.setElementInLocalStorage('user', response.user.id);
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user', response.user.id);
+
           this.utilsService.presentToast(
             'success',
             'Sucesso',

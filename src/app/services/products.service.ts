@@ -21,7 +21,7 @@ export class ProductsService {
 
   createProduct(productData: any, imageFile?: File): Observable<Product> {
     const formData = new FormData();
-    const user = this.utilsService.getElementFromLocalStorage('user');
+    const user: any = localStorage.getItem('user');
 
     if (imageFile) {
       formData.append('productImage', imageFile);

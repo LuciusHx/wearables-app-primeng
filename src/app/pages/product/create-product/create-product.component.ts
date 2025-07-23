@@ -80,7 +80,9 @@ export class CreateProductComponent {
           this.form.reset();
           this.router.navigateByUrl('/');
         },
-        error: (err) => {},
+        error: (err) => {
+           console.error('Erro ao criar produto:', err);
+        },
       });
     }
   }
