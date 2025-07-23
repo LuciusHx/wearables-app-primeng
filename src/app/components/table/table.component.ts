@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
@@ -36,6 +42,7 @@ const NgComponents = [
   imports: [CommonModule, NgComponents],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
   @Input() data: any[] = [];
@@ -46,33 +53,32 @@ export class TableComponent {
   @Input() rowsPerPageOptions: number[] = [5, 10, 25, 50];
   @Input() showCurrentPageReport: boolean = true;
   @Input() selectionMode: 'single' | 'multiple' | null = null;
-  itemsMenuTable: MenuItem[] | undefined = [
-    {
-      label: 'Opções',
-      items: [
-        {
-          label: 'Editar',
-          icon: 'pi pi-pencil',
-          command: () => {
-            console.log('editar');
-          },
-        },
-        {
-          label: 'Deletar',
-          icon: 'pi pi-trash',
-          command: () => {
-            console.log('delete');
-          },
-        },
-      ],
-    },
-  ];
 
   @Output() rowSelect = new EventEmitter<any>();
   @Output() rowUnselect = new EventEmitter<any>();
   @Output() sort = new EventEmitter<any>();
 
+  @Output() edit = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<any>();
+
   selectedRow: any;
+
+  menuItems: MenuItem[] = [];
+
+  updateMenuItems(rowData: any): void {
+    this.menuItems = [
+      {
+        label: 'Editar',
+        icon: 'pi pi-pencil',
+        command: () => this.edit.emit(rowData.id),
+      },
+      {
+        label: 'Deletar',
+        icon: 'pi pi-trash',
+        command: () => this.delete.emit(rowData.id),
+      },
+    ];
+  }
 
   onRowSelect(event: any) {
     this.rowSelect.emit(event);

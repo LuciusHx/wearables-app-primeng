@@ -33,23 +33,23 @@
       <td>
         <p-menu
           #menu
-          [model]="itemsMenuTable"
-          [popup]="true"
+          [model]="menuItems"
           [appendTo]="'body'"
-          [style]="{
-            'min-width': '120px',
-            }"
-        />
+          [style]="{ 'min-width': '120px' }"
+          [popup]="true"
+        ></p-menu>
         <p-button
-          (click)="menu.toggle($event)"
-          icon="pi pi-ellipsis-v"
-          size="small"
+          icon="pi pi-ellipsis-h"
           severity="contrast"
+          size="small"
+          (click)="updateMenuItems(rowData); menu.toggle($event)"
         />
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft" *ngIf="paginator">
-    <div class="text-sm text-gray-600">Total: {{ data.length || 0 || null}}</div>
+    <div class="text-sm text-gray-600">
+      Total: {{ data.length || 0 || null }}
+    </div>
   </ng-template>
 </p-table>

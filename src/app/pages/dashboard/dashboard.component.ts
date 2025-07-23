@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
 
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../services/utils.service';
 
-const NgComponents = [ButtonModule, MenuModule, DividerModule];
+const NgComponents = [ButtonModule, MenuModule, DividerModule, ];
 
 @Component({
   selector: 'app-dashboard',
@@ -46,6 +46,7 @@ export class DashboardComponent {
     },
     { field: 'stock', header: 'Estoque', sortable: true },
   ];
+
   loading: boolean = true;
 
   constructor(
@@ -81,5 +82,25 @@ export class DashboardComponent {
     this.router.navigate(['/product-detail', event.data.id]);
   }
 
-  deleteProduct() {}
+  deleteProduct(productId: string): void {
+    this.productsService.deleteProduct(productId).subscribe({
+      next: () => {
+        this.utilsService.presentToast(
+          'success',
+          'Sucesso',
+          'Produto excluído com sucesso!',
+          3000
+        );
+        this.loadProducts();
+      },
+      error: (error) => {
+        this.utilsService.presentToast(
+          'error',
+          'Erro',
+          'Não foi possível excluir o produto',
+          3000
+        );
+      },
+    });
+  }
 }

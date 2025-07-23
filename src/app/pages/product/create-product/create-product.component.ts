@@ -5,17 +5,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  FileUploadModule,
-  FileUploadEvent,
-  FileUpload,
-} from 'primeng/fileupload';
+import { FileUploadModule, FileUpload } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
 import { InputNumber } from 'primeng/inputnumber';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { AuthService } from '../../../services/auth.service';
+
 import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 
@@ -84,10 +80,7 @@ export class CreateProductComponent {
           this.form.reset();
           this.router.navigateByUrl('/');
         },
-        error: (err) => {
-          console.error('Erro ao criar produto:', err);
-          this.router.navigateByUrl('/');
-        },
+        error: (err) => {},
       });
     }
   }
