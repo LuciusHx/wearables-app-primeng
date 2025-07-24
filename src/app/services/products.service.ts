@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { environment } from '../../environments/environment.prod';
-import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private http: HttpClient, private utilsService: UtilsService) {}
+  constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.apiUrl + '/products');
@@ -47,6 +46,7 @@ export class ProductsService {
     imageFile?: File
   ): Observable<Product> {
     const formData = new FormData();
+    const user: any = localStorage.getItem('user');
 
     if (imageFile) {
       formData.append('productImage', imageFile);
@@ -58,7 +58,8 @@ export class ProductsService {
     formData.append('category', productData.category);
     formData.append('sizes', JSON.stringify(productData.sizes));
     formData.append('description', productData.description);
-    return this.http.post<Product>(
+    formData.append('updatedById', user);
+    return this.http.put<Product>(
       environment.apiUrl + '/products/' + productId,
       formData
     );

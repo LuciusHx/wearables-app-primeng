@@ -106,7 +106,16 @@ export class EditProductComponent {
 
       const imageFile = this.fu?.files?.[0];
 
-      this.productsService.updateProduct(this.id, productData, imageFile);
+      this.productsService
+        .updateProduct(this.id, productData, imageFile)
+        .subscribe({
+          next: (res) => {
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            console.error('Erro ao atualizar produto', err);
+          },
+        });
     }
   }
 }

@@ -24,14 +24,24 @@ const NgComponents = [ButtonModule, MenuModule, DividerModule];
 export class DashboardComponent {
   itemsMenu: MenuItem[] = [
     {
-      label: 'Novo Produto',
-      icon: 'pi pi-plus',
-      routerLink: '/create-product',
+      label: 'Produtos',
+      items: [
+        {
+          label: 'Novo Produto',
+          icon: 'pi pi-plus',
+          routerLink: '/create-product',
+        },
+      ],
     },
     {
-      label: 'Novo Usuário',
-      icon: 'pi pi-user-plus',
-      routerLink: '/create-user',
+      label: 'Usuários',
+      items: [
+        {
+          label: 'Novo Usuário',
+          icon: 'pi pi-user-plus',
+          routerLink: '/create-user',
+        },
+      ],
     },
   ];
   products: Product[] = [];
