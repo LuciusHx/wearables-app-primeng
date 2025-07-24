@@ -13,10 +13,10 @@ import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { ProductsService } from '../../../services/products.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-edit-product',
   imports: [
     ReactiveFormsModule,
     FileUploadModule,
@@ -26,15 +26,17 @@ import { Router } from '@angular/router';
     FloatLabel,
     InputTextModule,
   ],
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.scss',
+  templateUrl: './edit-product.component.html',
+  styleUrl: './edit-product.component.scss',
 })
-export class CreateProductComponent {
+export class EditProductComponent {
+  public id!: string;
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-    discount: new FormControl('', [Validators.required]),
+    price: new FormControl<number | null>(0, [Validators.required]),
+    discount: new FormControl<number | null>(0, [Validators.required]),
     category: new FormControl('', [Validators.required]),
     sizeP: new FormControl(0, [Validators.required, Validators.min(0)]),
     sizeM: new FormControl(0, [Validators.required, Validators.min(0)]),
@@ -46,8 +48,36 @@ export class CreateProductComponent {
 
   constructor(
     private productsService: ProductsService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
+
+  ngOnInit() {
+    this.loadProduct();
+  }
+
+  loadProduct() {
+    this.productsService.getProductsById(this.id).subscribe({
+      next: (res) => {
+        const sizeP = res.sizes.find((s) => s.size?.label === 'P')?.stock || 0;
+        const sizeM = res.sizes.find((s) => s.size?.label === 'M')?.stock || 0;
+        const sizeG = res.sizes.find((s) => s.size?.label === 'G')?.stock || 0;
+
+        this.form.setValue({
+          name: res.name,
+          description: res.description || '',
+          price: res.price,
+          discount: res.discount,
+          category: res.category.name,
+          sizeP: sizeP,
+          sizeM: sizeM,
+          sizeG: sizeG,
+        });
+      },
+    });
+  }
 
   onSubmit() {
     if (this.form.valid) {
@@ -74,17 +104,9 @@ export class CreateProductComponent {
         ],
       };
 
-      const imageFile = this.fu?.files?.[0]; // Arquivo do upload
+      const imageFile = this.fu?.files?.[0];
 
-      this.productsService.createProduct(productData, imageFile).subscribe({
-        next: (response) => {
-          this.form.reset();
-          this.router.navigateByUrl('/');
-        },
-        error: (err) => {
-           console.error('Erro ao criar produto:', err);
-        },
-      });
+      this.productsService.updateProduct(this.id, productData, imageFile);
     }
   }
 }

@@ -5,7 +5,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { ClientComponent } from './layout/client/client.component';
 import { AdminComponent } from './layout/admin/admin.component';
 
-
 export const routes: Routes = [
   //client
   {
@@ -43,19 +42,29 @@ export const routes: Routes = [
             (m) => m.DashboardComponent
           ),
       },
-      {
-        path: 'create-user',
-        loadComponent: () =>
-          import('./pages/user/create-user/create-user.component').then(
-            (m) => m.CreateUserComponent
-          ),
-      },
+
+      // ===== PRODUCT ====
       {
         path: 'create-product',
         loadComponent: () =>
           import(
             './pages/product/create-product/create-product.component'
           ).then((m) => m.CreateProductComponent),
+      },
+      {
+        path: 'edit-product/:id',
+        loadComponent: () =>
+          import(
+            './pages/product//edit-product/edit-product.component'
+          ).then((m) => m.EditProductComponent),
+      },
+      // ===== USER ====
+      {
+        path: 'create-user/:id',
+        loadComponent: () =>
+          import('./pages/user/create-user/create-user.component').then(
+            (m) => m.CreateUserComponent
+          ),
       },
     ],
     canActivate: [AuthGuard],

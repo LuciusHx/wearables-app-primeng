@@ -33,10 +33,34 @@ export class ProductsService {
     formData.append('category', productData.category);
     formData.append('sizes', JSON.stringify(productData.sizes));
     formData.append('registredById', user);
+    formData.append('description', productData.description);
     return this.http.post<Product>(environment.apiUrl + '/products', formData);
   }
 
-  deleteProduct(id: string) {
-    return this.http.delete(environment.apiUrl + '/products/' + id);
+  deleteProduct(productId: string) {
+    return this.http.delete(environment.apiUrl + '/products/' + productId);
+  }
+
+  updateProduct(
+    productId: string,
+    productData: any,
+    imageFile?: File
+  ): Observable<Product> {
+    const formData = new FormData();
+
+    if (imageFile) {
+      formData.append('productImage', imageFile);
+    }
+
+    formData.append('name', productData.name);
+    formData.append('price', productData.price);
+    formData.append('discount', productData.discount);
+    formData.append('category', productData.category);
+    formData.append('sizes', JSON.stringify(productData.sizes));
+    formData.append('description', productData.description);
+    return this.http.post<Product>(
+      environment.apiUrl + '/products/' + productId,
+      formData
+    );
   }
 }

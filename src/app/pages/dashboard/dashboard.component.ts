@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
 
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../services/utils.service';
 
-const NgComponents = [ButtonModule, MenuModule, DividerModule, ];
+const NgComponents = [ButtonModule, MenuModule, DividerModule];
 
 @Component({
   selector: 'app-dashboard',
@@ -80,6 +80,10 @@ export class DashboardComponent {
 
   onRowSelect(event: any) {
     this.router.navigate(['/product-detail', event.data.id]);
+  }
+
+  redirectToEdit(productId: string) {
+    this.router.navigateByUrl('/edit-product/' + productId);
   }
 
   deleteProduct(productId: string): void {
