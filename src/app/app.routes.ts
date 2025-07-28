@@ -54,13 +54,20 @@ export const routes: Routes = [
       {
         path: 'edit-product/:id',
         loadComponent: () =>
-          import(
-            './pages/product//edit-product/edit-product.component'
-          ).then((m) => m.EditProductComponent),
+          import('./pages/product//edit-product/edit-product.component').then(
+            (m) => m.EditProductComponent
+          ),
       },
       // ===== USER ====
       {
-        path: 'create-user/:id',
+        path: 'users',
+        loadComponent: () =>
+          import('./pages/user/gerenc-users/gerenc-users.component').then(
+            (m) => m.GerencUsersComponent
+          ),
+      },
+      {
+        path: 'create-user',
         loadComponent: () =>
           import('./pages/user/create-user/create-user.component').then(
             (m) => m.CreateUserComponent

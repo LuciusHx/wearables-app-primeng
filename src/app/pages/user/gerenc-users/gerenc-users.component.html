@@ -1,0 +1,15 @@
+<div class="flex px-10">
+  <app-menu></app-menu>
+
+  <app-table
+    [data]="users"
+    [columns]="columns"
+    [paginator]="true"
+    [rows]="5"
+    [selectionMode]="'single'"
+    (rowSelect)="onRowSelect($event)"
+    (edit)="redirectToEdit($event)"
+    class="w-full"
+    (delete)="deleteUser($event)"
+  ></app-table>
+</div>

@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 
 import { ButtonModule } from 'primeng/button';
-import { MenuModule } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
-import { DividerModule } from 'primeng/divider';
 
 import { AuthService } from '../../services/auth.service';
 import { TableComponent } from '../../components/table/table.component';
@@ -12,38 +9,18 @@ import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../services/utils.service';
+import { MenuComponent } from "../../components/menu/menu.component";
 
-const NgComponents = [ButtonModule, MenuModule, DividerModule];
+const NgComponents = [ButtonModule];
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgComponents, CommonModule, TableComponent],
+  imports: [NgComponents, CommonModule, TableComponent, MenuComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  itemsMenu: MenuItem[] = [
-    {
-      label: 'Produtos',
-      items: [
-        {
-          label: 'Novo Produto',
-          icon: 'pi pi-plus',
-          routerLink: '/create-product',
-        },
-      ],
-    },
-    {
-      label: 'Usuários',
-      items: [
-        {
-          label: 'Novo Usuário',
-          icon: 'pi pi-user-plus',
-          routerLink: '/create-user',
-        },
-      ],
-    },
-  ];
+  
   products: Product[] = [];
 
   columns = [
