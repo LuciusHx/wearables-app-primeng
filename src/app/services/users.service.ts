@@ -22,7 +22,7 @@ export class UsersService {
     const formData = new FormData();
 
     if (imageFile) {
-      formData.append('productImage', imageFile);
+      formData.append('avatar', imageFile);
     }
 
     formData.append('name', userData.name);
