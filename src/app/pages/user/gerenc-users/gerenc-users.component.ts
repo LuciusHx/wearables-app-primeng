@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
-import { TableComponent } from '../../../components/table/table.component';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+
 import { User } from '../../../models/user.model';
+
 import { UsersService } from '../../../services/users.service';
 import { AuthService } from '../../../services/auth.service';
 import { UtilsService } from '../../../services/utils.service';
-import { Router } from '@angular/router';
-import { MenuComponent } from "../../../components/menu/menu.component";
+
+import { TableComponent } from '../../../components/table/table.component';
+import { MenuComponent } from '../../../components/menu/menu.component';
+
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-gerenc-users',
-  imports: [TableComponent, MenuComponent],
+  imports: [CommonModule, TableComponent, MenuComponent, ButtonModule, RouterLink],
   templateUrl: './gerenc-users.component.html',
   styleUrl: './gerenc-users.component.scss',
 })
@@ -23,7 +29,7 @@ export class GerencUsersComponent {
     { field: 'email', header: 'Email', sortable: false },
   ];
 
-  loading: boolean = true;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,

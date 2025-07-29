@@ -1,97 +1,12 @@
 import { Component } from '@angular/core';
-
 import { ButtonModule } from 'primeng/button';
-
-import { AuthService } from '../../services/auth.service';
-import { TableComponent } from '../../components/table/table.component';
-import { ProductsService } from '../../services/products.service';
-import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { UtilsService } from '../../services/utils.service';
-import { MenuComponent } from "../../components/menu/menu.component";
-
-const NgComponents = [ButtonModule];
+import { MenuComponent } from '../../components/menu/menu.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgComponents, CommonModule, TableComponent, MenuComponent],
+  imports: [CommonModule, MenuComponent, ButtonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
-  
-  products: Product[] = [];
-
-  columns = [
-    { field: 'name', header: 'Nome', sortable: true },
-    {
-      field: 'price',
-      header: 'Preço',
-      sortable: true,
-      format: (value: number) => `R$${value.toFixed(2)}`,
-    },
-    { field: 'stock', header: 'Estoque', sortable: true },
-  ];
-
-  loading: boolean = true;
-
-  constructor(
-    private authService: AuthService,
-    private productsService: ProductsService,
-    private router: Router,
-    private utilsService: UtilsService
-  ) {}
-
-  ngOnInit() {
-    this.loadProducts();
-  }
-
-  logout() {
-    this.authService.logout();
-  }
-
-  loadProducts(): void {
-    this.loading = true;
-    this.productsService.getProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar produtos:', error);
-        this.loading = false;
-      },
-    });
-  }
-
-  onRowSelect(event: any) {
-    this.router.navigate(['/product-detail', event.data.id]);
-  }
-
-  redirectToEdit(productId: string) {
-    this.router.navigateByUrl('/edit-product/' + productId);
-  }
-
-  deleteProduct(productId: string): void {
-    this.productsService.deleteProduct(productId).subscribe({
-      next: () => {
-        this.utilsService.presentToast(
-          'success',
-          'Sucesso',
-          'Produto excluído com sucesso!',
-          3000
-        );
-        this.loadProducts();
-      },
-      error: (error) => {
-        this.utilsService.presentToast(
-          'error',
-          'Erro',
-          'Não foi possível excluir o produto',
-          3000
-        );
-      },
-    });
-  }
-}
+export class DashboardComponent {}

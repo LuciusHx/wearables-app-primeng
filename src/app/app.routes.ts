@@ -17,10 +17,10 @@ export const routes: Routes = [
           import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'product-detail/:id',
+        path: 'product-view/:id',
         loadComponent: () =>
-          import('./pages/product-detail/product-detail.component').then(
-            (m) => m.ProductDetailComponent
+          import('./pages/product-view/product-view.component').then(
+            (m) => m.ProductViewComponent
           ),
       },
       {
@@ -44,6 +44,13 @@ export const routes: Routes = [
       },
 
       // ===== PRODUCT ====
+      {
+        path: 'produtos',
+        loadComponent: () =>
+          import(
+            './pages/product/gerenc-product/gerenc-product.component'
+          ).then((m) => m.GerencProductComponent),
+      },
       {
         path: 'create-product',
         loadComponent: () =>

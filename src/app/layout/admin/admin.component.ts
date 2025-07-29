@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../../components/header/header.component";
+import { SharedModule } from '../../modules/shared.module';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [SharedModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
 })
-export class AdminComponent {
-
-}
+export class AdminComponent {}

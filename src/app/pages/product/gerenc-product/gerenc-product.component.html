@@ -1,29 +1,31 @@
 <div class="flex px-10">
   <app-menu></app-menu>
-
-  <div class="w-full">
+  <section class="w-full">
     <div *ngIf="!loading" class="pt-3 pb-5">
-      <p-button label="Adicionar Usuários" icon="pi pi-plus" severity="contrast" routerLink="/create-user"/>
+      <p-button
+        label="Adicionar Usuários"
+        icon="pi pi-plus"
+        severity="contrast"
+        routerLink="/create-user"
+      />
     </div>
     <app-table
-      [data]="users"
+      [data]="products"
       [columns]="columns"
       [paginator]="true"
       [rows]="10"
       [selectionMode]="'single'"
       (rowSelect)="onRowSelect($event)"
-      (edit)="redirectToEdit($event)"
-      
-      (delete)="deleteUser($event)"
+      (delete)="deleteProduct($event)"
       (edit)="redirectToEdit($event)"
     ></app-table>
     <div *ngIf="loading" class="p-4 text-center">
       <p class="mt-2">Carregando produtos...</p>
     </div>
 
-    <div *ngIf="!loading && users.length === 0" class="p-4 text-center">
+    <div *ngIf="!loading && products.length === 0" class="p-4 text-center">
       <p>Nenhum produto encontrado.</p>
-      <button pButton label="Recarregar" (click)="loadUsers()"></button>
+      <button pButton label="Recarregar" (click)="loadProducts()"></button>
     </div>
-  </div>
+  </section>
 </div>

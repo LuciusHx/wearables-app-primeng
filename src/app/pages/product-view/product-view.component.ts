@@ -25,10 +25,10 @@ const NgPrimeComponents = [
 @Component({
   selector: 'app-product-detail',
   imports: [NgPrimeComponents, CommonModule, FormsModule],
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss',
+  templateUrl: './product-view.component.html',
+  styleUrl: './product-view.component.scss',
 })
-export class ProductDetailComponent {
+export class ProductViewComponent {
   product: Product | undefined;
   selectedSize: any;
   sizeOptions: any[] = [];

@@ -1,24 +1,5 @@
 <div class="flex px-10">
 
   <app-menu></app-menu>
-  <section class="w-full">
-    <app-table
-      [data]="products"
-      [columns]="columns"
-      [paginator]="true"
-      [rows]="5"
-      [selectionMode]="'single'"
-      (rowSelect)="onRowSelect($event)"
-      (delete)="deleteProduct($event)"
-      (edit)="redirectToEdit($event)"
-    ></app-table>
-    <div *ngIf="loading" class="p-4 text-center">
-      <p class="mt-2">Carregando produtos...</p>
-    </div>
-
-    <div *ngIf="!loading && products.length === 0" class="p-4 text-center">
-      <p>Nenhum produto encontrado.</p>
-      <button pButton label="Recarregar" (click)="loadProducts()"></button>
-    </div>
-  </section>
+  <h2 class="text-6xl flex justify-center w-full">DashBoard</h2>
 </div>

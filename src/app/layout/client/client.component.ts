@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../../components/header/header.component";
+import { SharedModule } from '../../modules/shared.module';
 
 @Component({
   selector: 'app-client',
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [SharedModule],
   templateUrl: './client.component.html',
-  styleUrl: './client.component.scss'
+  styleUrl: './client.component.scss',
 })
-export class ClientComponent {
-
-}
+export class ClientComponent {}

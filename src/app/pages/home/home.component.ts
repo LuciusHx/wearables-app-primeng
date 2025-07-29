@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+
 import { Product } from '../../models/product.model';
 import { TotalStockPipe } from '../../pipes/total-stock.pipe';
 
@@ -8,12 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { DataView } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { SelectButton } from 'primeng/selectbutton';
-import { CommonModule } from '@angular/common';
 import { Skeleton } from 'primeng/skeleton';
 
 import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
-
 import { ProductsService } from '../../services/products.service';
+
 
 const NgPrimeComponents = [
   ButtonModule,

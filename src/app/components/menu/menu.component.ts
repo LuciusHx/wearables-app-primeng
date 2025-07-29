@@ -13,28 +13,13 @@ export class MenuComponent {
   itemsMenu: MenuItem[] = [
     {
       label: 'Produtos',
-      items: [
-        {
-          label: 'Novo Produto',
-          icon: 'pi pi-plus',
-          routerLink: '/create-product',
-        },
-      ],
+      icon: 'pi pi pi-shop',
+      routerLink: '/produtos',
     },
     {
       label: 'Usuários',
-      items: [
-        {
-          label: 'Usuários',
-          icon: 'pi pi-user',
-          routerLink: '/users',
-        },
-        {
-          label: 'Novo Usuário',
-          icon: 'pi pi-user-plus',
-          routerLink: '/create-user',
-        },
-      ],
+      icon: 'pi pi-user',
+      routerLink: '/users',
     },
   ];
 }

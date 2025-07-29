@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -8,21 +9,20 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { Select } from 'primeng/select';
 import { FluidModule } from 'primeng/fluid';
-import { CommonModule } from '@angular/common';
+
+const NgComponents = [
+  InputGroup,
+  InputGroupAddonModule,
+  InputTextModule,
+  ButtonModule,
+  CardModule,
+  Select,
+  FluidModule,
+];
 
 @Component({
   selector: 'app-search-filter',
-  imports: [
-    CommonModule,
-    FormsModule,
-    InputGroup,
-    InputGroupAddonModule,
-    InputTextModule,
-    ButtonModule,
-    CardModule,
-    Select,
-    FluidModule,
-  ],
+  imports: [NgComponents, CommonModule, FormsModule],
   templateUrl: './search-filter.component.html',
   styleUrl: './search-filter.component.scss',
 })
