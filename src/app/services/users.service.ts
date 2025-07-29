@@ -14,6 +14,10 @@ export class UsersService {
     return this.http.get<User[]>(environment.apiUrl + '/users');
   }
 
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(environment.apiUrl + '/users/' + userId);
+  }
+
   createUser(userData: any, imageFile?: File): Observable<User> {
     const formData = new FormData();
 
@@ -31,5 +35,28 @@ export class UsersService {
 
   deleteUser(userId: string) {
     return this.http.delete(environment.apiUrl + '/users/' + userId);
+  }
+
+  updateUser(
+    userId: string,
+    userData: any,
+    imageFile?: File
+  ): Observable<User> {
+    const formData = new FormData();
+
+    if (imageFile) {
+      formData.append('avatar', imageFile);
+    }
+
+    formData.append('name', userData.name);
+    formData.append('username', userData.username);
+    formData.append('email', userData.email);
+    formData.append('password', userData.password);
+    formData.append('role', userData.role);
+
+    return this.http.put<User>(
+      environment.apiUrl + '/user/' + userId,
+      formData
+    );
   }
 }

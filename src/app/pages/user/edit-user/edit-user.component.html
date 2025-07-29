@@ -1,0 +1,49 @@
+<div class="m-15">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col justify-center"
+  >
+    <h2 class="font-bold text-2xl mb-10">Cadastro de Usuários</h2>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <label>Nome</label>
+        <input type="text" pInputText formControlName="name" />
+      </div>
+      <div class="flex flex-col">
+        <label>Username</label>
+        <input type="text" pInputText formControlName="username" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <label>Email</label>
+        <input type="text" pInputText formControlName="email" />
+      </div>
+      <div class="flex flex-col">
+        <label>Cargo</label>
+        <p-select
+          formControlName="role"
+          [options]="roles"
+          class="h-10.5"
+          placeholder="Selecionar"
+        />
+      </div>
+    </div>
+
+    <div class="flex mt-3 justify-between">
+      <p-fileupload
+        #fu
+        mode="basic"
+        chooseLabel="Upload"
+        chooseIcon="pi pi-upload"
+        accept="image/*"
+        maxFileSize="1000000"
+        class="col-start-1"
+      />
+      <p-button label="Cadastrar" type="submit" />
+    </div>
+  </form>
+</div>

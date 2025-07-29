@@ -73,6 +73,13 @@ export const routes: Routes = [
             (m) => m.CreateUserComponent
           ),
       },
+      {
+        path: 'edit-user/:id',
+        loadComponent: () =>
+          import('./pages/user/edit-user/edit-user.component').then(
+            (m) => m.EditUserComponent
+          ),
+      },
     ],
     canActivate: [AuthGuard],
   },

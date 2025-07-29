@@ -14,8 +14,10 @@ export class ProductsService {
     return this.http.get<Product[]>(environment.apiUrl + '/products');
   }
 
-  getProductsById(id: string): Observable<Product> {
-    return this.http.get<Product>(environment.apiUrl + '/products/' + id);
+  getProductsById(productId: string): Observable<Product> {
+    return this.http.get<Product>(
+      environment.apiUrl + '/products/' + productId
+    );
   }
 
   createProduct(productData: any, imageFile?: File): Observable<Product> {
