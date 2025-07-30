@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TableComponent } from '../../../components/table/table.component';
 import { AuthService } from '../../../services/auth.service';
 import { ProductsService } from '../../../services/products.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UtilsService } from '../../../services/utils.service';
 import { Product } from '../../../models/product.model';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-gerenc-product',
-  imports: [CommonModule, TableComponent, MenuComponent, ButtonModule],
+  imports: [CommonModule, TableComponent, MenuComponent, ButtonModule, RouterLink],
   templateUrl: './gerenc-product.component.html',
   styleUrl: './gerenc-product.component.scss',
 })

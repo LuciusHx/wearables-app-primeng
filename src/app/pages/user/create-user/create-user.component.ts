@@ -12,10 +12,12 @@ import { SelectModule } from 'primeng/select';
 import { CustomValidators } from '../../../validators/custom-Validators';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-user',
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     FileUploadModule,
     ButtonModule,
@@ -26,7 +28,7 @@ import { Router } from '@angular/router';
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
-  roles = ['ADMIN', 'CLIENT'];
+  roles = ['ADMIN', 'USER'];
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),

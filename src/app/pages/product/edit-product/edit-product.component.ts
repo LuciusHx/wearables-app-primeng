@@ -110,7 +110,7 @@ export class EditProductComponent {
         .updateProduct(this.id, productData, imageFile)
         .subscribe({
           next: (res) => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/produtos']);
           },
           error: (err) => {
             console.error('Erro ao atualizar produto', err);

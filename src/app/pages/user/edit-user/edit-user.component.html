@@ -32,6 +32,16 @@
         />
       </div>
     </div>
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <label>Senha</label>
+        <input type="text" pInputText formControlName="password" />
+      </div>
+      <div class="flex flex-col">
+        <label>Confirmar Senha:</label>
+        <input type="text" pInputText formControlName="confirmPassword" />
+      </div>
+    </div>
 
     <div class="flex mt-3 justify-between">
       <p-fileupload
@@ -43,7 +53,7 @@
         maxFileSize="1000000"
         class="col-start-1"
       />
-      <p-button label="Cadastrar" type="submit" />
+      <p-button label="Salvar" type="submit" />
     </div>
   </form>
 </div>

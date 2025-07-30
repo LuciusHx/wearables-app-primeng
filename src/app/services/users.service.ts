@@ -51,11 +51,11 @@ export class UsersService {
     formData.append('name', userData.name);
     formData.append('username', userData.username);
     formData.append('email', userData.email);
-    formData.append('password', userData.password);
     formData.append('role', userData.role);
+    formData.append('password', userData.password);
 
     return this.http.put<User>(
-      environment.apiUrl + '/user/' + userId,
+      environment.apiUrl + '/users/' + userId,
       formData
     );
   }
