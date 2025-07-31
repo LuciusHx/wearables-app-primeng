@@ -17,6 +17,8 @@ import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 export interface TableColumn {
   field: string;
@@ -35,6 +37,7 @@ const NgComponents = [
   SelectModule,
   ButtonModule,
   Menu,
+  ConfirmDialogModule
 ];
 
 @Component({
@@ -42,6 +45,7 @@ const NgComponents = [
   imports: [CommonModule, NgComponents],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
+  providers: [ConfirmationService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
@@ -70,14 +74,40 @@ export class TableComponent {
       {
         label: 'Editar',
         icon: 'pi pi-pencil',
-        command: () => this.edit.emit(rowData.id),
+        command: () => this.onEdit(rowData.id),
       },
       {
         label: 'Deletar',
         icon: 'pi pi-trash',
-        command: () => this.delete.emit(rowData.id),
+        command: () => this.confirmDelete(rowData),
       },
     ];
+  }
+
+  constructor(private confirmationService: ConfirmationService) {}
+
+  confirmDelete(rowData: any) {
+  this.confirmationService.confirm({
+    message: 'Você realmente deseja deletar esse item?',
+    header: 'Atenção!',
+    icon: 'pi pi-info-circle',
+    rejectLabel: 'Cancelar',
+    rejectButtonProps: {
+      severity: 'secondary',
+      outlined: true,
+    },
+    acceptButtonProps: {
+      label: 'Sim',
+      severity: 'danger',
+    },
+    accept: () => {
+      this.delete.emit(rowData.id);
+    },
+  });
+}
+
+  onEdit(rowData: any) {
+    this.edit.emit(rowData.id);
   }
 
   onRowSelect(event: any) {
