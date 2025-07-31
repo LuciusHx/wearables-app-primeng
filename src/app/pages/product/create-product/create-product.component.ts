@@ -1,31 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { FileUploadModule, FileUpload } from 'primeng/fileupload';
-import { ButtonModule } from 'primeng/button';
-import { InputNumber } from 'primeng/inputnumber';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { FloatLabel } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileUpload } from 'primeng/fileupload';
 import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
+import { FormProductComponent } from '../form-product/form-product.component';
 
 @Component({
   selector: 'app-create-product',
-  imports: [
-    ReactiveFormsModule,
-    FileUploadModule,
-    ButtonModule,
-    InputNumber,
-    InputNumberModule,
-    FloatLabel,
-    InputTextModule,
-  ],
+  imports: [FormProductComponent],
   templateUrl: './create-product.component.html',
   styleUrl: './create-product.component.scss',
 })
@@ -82,7 +64,7 @@ export class CreateProductComponent {
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-           console.error('Erro ao criar produto:', err);
+          console.error('Erro ao criar produto:', err);
         },
       });
     }

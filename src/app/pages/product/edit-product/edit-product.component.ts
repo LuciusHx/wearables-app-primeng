@@ -1,31 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { FileUploadModule, FileUpload } from 'primeng/fileupload';
-import { ButtonModule } from 'primeng/button';
-import { InputNumber } from 'primeng/inputnumber';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { FloatLabel } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileUpload } from 'primeng/fileupload';
 
 import { ProductsService } from '../../../services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormProductComponent } from '../form-product/form-product.component';
 
 @Component({
   selector: 'app-edit-product',
-  imports: [
-    ReactiveFormsModule,
-    FileUploadModule,
-    ButtonModule,
-    InputNumber,
-    InputNumberModule,
-    FloatLabel,
-    InputTextModule,
-  ],
+  imports: [FormProductComponent],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss',
 })
@@ -34,10 +17,10 @@ export class EditProductComponent {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
     price: new FormControl<number | null>(0, [Validators.required]),
     discount: new FormControl<number | null>(0, [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     sizeP: new FormControl(0, [Validators.required, Validators.min(0)]),
     sizeM: new FormControl(0, [Validators.required, Validators.min(0)]),
     sizeG: new FormControl(0, [Validators.required, Validators.min(0)]),
