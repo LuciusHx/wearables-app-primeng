@@ -12,6 +12,7 @@ import { SelectModule } from 'primeng/select';
 import { UsersService } from '../../../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomValidators } from '../../../validators/custom-Validators';
+import { FormUserComponent } from "../form-user/form-user.component";
 
 @Component({
   selector: 'app-edit-user',
@@ -21,7 +22,8 @@ import { CustomValidators } from '../../../validators/custom-Validators';
     FileUploadModule,
     InputTextModule,
     SelectModule,
-  ],
+    FormUserComponent
+],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
 })

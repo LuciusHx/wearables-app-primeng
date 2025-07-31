@@ -1,0 +1,91 @@
+<div class="m-15">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col justify-center"
+  >
+    <h2 class="font-bold text-2xl mb-10">Cadastro de Usuários</h2>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Nome</label>
+          <small class="text-red-700" *ngIf="!form.get('name')?.valid && form.get('name')?.touched"
+            >Campo obrigatório.</small
+          >
+        </div>
+        <input type="text" pInputText formControlName="name" />
+      </div>
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Username</label>
+          <small class="text-red-700" *ngIf="!form.get('username')?.valid && form.get('username')?.touched"
+            >Campo obrigatório.</small
+          >
+        </div>
+        <input type="text" pInputText formControlName="username" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Email</label>
+          <small class="text-red-700" *ngIf="!form.get('email')?.valid && form.get('email')?.touched"
+            >Digite um email válido.</small
+          >
+        </div>
+        <input type="text" pInputText formControlName="email" />
+      </div>
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Cargo</label>
+          <small class="text-red-700" *ngIf="!form.get('role')?.valid && form.get('role')?.touched"
+            >Selecione um cargo.</small
+          >
+        </div>
+        <p-select
+          formControlName="role"
+          [options]="roles"
+          class="h-10.5"
+          placeholder="Selecionar"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Senha</label>
+          <small class="text-red-700" *ngIf="!form.get('password')?.valid && form.get('password')?.touched"
+            >Campo obrigatório.</small
+          >
+        </div>
+        <input type="password" pInputText formControlName="password" />
+      </div>
+      <div class="flex flex-col">
+        <div class="flex justify-between">
+          <label>Confirmar Senha:</label>
+          <small
+            class="text-red-700"
+            *ngIf="!form.get('confirmPassword')?.valid && form.get('confirmPassword')?.touched"
+            >As senhas não são iguais.</small
+          >
+        </div>
+        <input type="password" pInputText formControlName="confirmPassword" />
+      </div>
+    </div>
+    <div class="flex mt-3 justify-between">
+      <p-fileupload
+        #fu
+        mode="basic"
+        chooseLabel="Upload"
+        chooseIcon="pi pi-upload"
+        accept="image/*"
+        maxFileSize="1000000"
+        class="col-start-1"
+      />
+      <p-button label="Cadastrar" type="submit" [disabled]="form.invalid"/>
+    </div>
+  </form>
+</div>

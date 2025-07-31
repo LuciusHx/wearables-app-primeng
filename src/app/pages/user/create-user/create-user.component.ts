@@ -13,6 +13,7 @@ import { CustomValidators } from '../../../validators/custom-Validators';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormUserComponent } from "../form-user/form-user.component";
 
 @Component({
   selector: 'app-create-user',
@@ -23,7 +24,9 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     InputTextModule,
     SelectModule,
-  ],
+    FormUserComponent,
+    FormUserComponent
+],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
