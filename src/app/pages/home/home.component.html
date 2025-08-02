@@ -118,17 +118,17 @@
               class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4 p-2 max-w-md"
             >
               <div
-                class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col h-140"
+                class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col h-132"
               >
                 <div class="bg-surface-50 flex justify-center rounded p-4">
-                  <div class="relative mx-auto w-2xs h-2xs">
+                  <div class="relative mx-auto w-2xs h-2xs aspect-square" style="height: 250px;">
                     <img
-                      class="rounded w-full"
+                      class="rounded w-full h-full object-cover"
                       [src]="product.productImage"
                       [alt]="product.name"
                       loading="lazy"
-                      />
-                    </div>
+                    />
+                  </div>
                 </div>
                 <div class="pt-6">
                   <div
