@@ -13,7 +13,7 @@ import { CustomValidators } from '../../../validators/custom-Validators';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormUserComponent } from "../form-user/form-user.component";
+import { FormUserComponent } from '../form-user/form-user.component';
 
 @Component({
   selector: 'app-create-user',
@@ -25,8 +25,8 @@ import { FormUserComponent } from "../form-user/form-user.component";
     InputTextModule,
     SelectModule,
     FormUserComponent,
-    FormUserComponent
-],
+    FormUserComponent,
+  ],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
@@ -42,8 +42,7 @@ export class CreateUserComponent {
     confirmPassword: new FormControl('', []),
   });
 
-  @ViewChild('fu') fu!: FileUpload;
-  selectedFile?: File;
+  @ViewChild(FormUserComponent) formUserComponent!: FormUserComponent;
 
   ngOnInit() {
     this.confirmPasswordValidator();
@@ -70,7 +69,7 @@ export class CreateUserComponent {
         password: formValue.password,
       };
 
-      const imageFile = this.fu?.files?.[0];
+      const imageFile = this.formUserComponent.getSelectedFile();
 
       this.userService.createUser(userData, imageFile).subscribe({
         next: (response) => {

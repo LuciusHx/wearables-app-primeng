@@ -26,8 +26,7 @@ export class EditProductComponent {
     sizeG: new FormControl(0, [Validators.required, Validators.min(0)]),
   });
 
-  @ViewChild('fu') fu!: FileUpload;
-  selectedFile?: File;
+  @ViewChild(FormProductComponent) formProductComponent!: FormProductComponent;
 
   constructor(
     private productsService: ProductsService,
@@ -87,7 +86,7 @@ export class EditProductComponent {
         ],
       };
 
-      const imageFile = this.fu?.files?.[0];
+      const imageFile = this.formProductComponent.getSelectedFile();
 
       this.productsService
         .updateProduct(this.id, productData, imageFile)

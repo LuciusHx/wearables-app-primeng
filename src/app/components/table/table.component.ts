@@ -37,7 +37,7 @@ const NgComponents = [
   SelectModule,
   ButtonModule,
   Menu,
-  ConfirmDialogModule
+  ConfirmDialogModule,
 ];
 
 @Component({
@@ -74,7 +74,7 @@ export class TableComponent {
       {
         label: 'Editar',
         icon: 'pi pi-pencil',
-        command: () => this.onEdit(rowData.id),
+        command: () => this.onEdit(rowData),
       },
       {
         label: 'Deletar',
@@ -87,24 +87,24 @@ export class TableComponent {
   constructor(private confirmationService: ConfirmationService) {}
 
   confirmDelete(rowData: any) {
-  this.confirmationService.confirm({
-    message: 'Você realmente deseja deletar esse item?',
-    header: 'Atenção!',
-    icon: 'pi pi-info-circle',
-    rejectLabel: 'Cancelar',
-    rejectButtonProps: {
-      severity: 'secondary',
-      outlined: true,
-    },
-    acceptButtonProps: {
-      label: 'Sim',
-      severity: 'danger',
-    },
-    accept: () => {
-      this.delete.emit(rowData.id);
-    },
-  });
-}
+    this.confirmationService.confirm({
+      message: 'Você realmente deseja deletar esse item?',
+      header: 'Atenção!',
+      icon: 'pi pi-info-circle',
+      rejectLabel: 'Cancelar',
+      rejectButtonProps: {
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Sim',
+        severity: 'danger',
+      },
+      accept: () => {
+        this.delete.emit(rowData.id);
+      },
+    });
+  }
 
   onEdit(rowData: any) {
     this.edit.emit(rowData.id);

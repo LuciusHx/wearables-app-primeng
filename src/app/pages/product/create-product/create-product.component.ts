@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FileUpload } from 'primeng/fileupload';
 import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 import { FormProductComponent } from '../form-product/form-product.component';
@@ -23,8 +22,7 @@ export class CreateProductComponent {
     sizeG: new FormControl(0, [Validators.required, Validators.min(0)]),
   });
 
-  @ViewChild('fu') fu!: FileUpload;
-  selectedFile?: File;
+  @ViewChild(FormProductComponent) formProductComponent!: FormProductComponent;
 
   constructor(
     private productsService: ProductsService,
@@ -56,12 +54,12 @@ export class CreateProductComponent {
         ],
       };
 
-      const imageFile = this.fu?.files?.[0]; // Arquivo do upload
+      const imageFile = this.formProductComponent.getSelectedFile();
 
       this.productsService.createProduct(productData, imageFile).subscribe({
         next: (response) => {
           this.form.reset();
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/produtos');
         },
         error: (err) => {
           console.error('Erro ao criar produto:', err);

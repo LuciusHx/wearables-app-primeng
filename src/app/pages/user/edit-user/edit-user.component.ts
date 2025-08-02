@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { UsersService } from '../../../services/users.service';
@@ -49,8 +49,7 @@ export class EditUserComponent {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
 
-  @ViewChild('fu') fu!: FileUpload;
-  selectedFile?: File;
+  @ViewChild(FormUserComponent) formUserComponent!: FormUserComponent;
 
   ngOnInit() {
     this.loadUser();
@@ -91,7 +90,7 @@ export class EditUserComponent {
         password: formValue.password,
       };
 
-      const imageFile = this.fu?.files?.[0];
+      const imageFile = this.formUserComponent.getSelectedFile();
 
       this.userService.updateUser(this.id, userData, imageFile).subscribe({
         next: (res) => {
