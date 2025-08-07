@@ -20,7 +20,7 @@ export class EditProductComponent {
     category: new FormControl('', [Validators.required]),
     price: new FormControl<number | null>(0, [Validators.required]),
     discount: new FormControl<number | null>(0, [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', []),
     sizeP: new FormControl(0, [Validators.required, Validators.min(0)]),
     sizeM: new FormControl(0, [Validators.required, Validators.min(0)]),
     sizeG: new FormControl(0, [Validators.required, Validators.min(0)]),

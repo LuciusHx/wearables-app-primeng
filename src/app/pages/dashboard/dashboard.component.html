@@ -1,5 +1,18 @@
 <div class="flex px-10">
-
   <app-menu></app-menu>
-  <h2 class="text-6xl flex justify-center w-full">DashBoard</h2>
+  <div class="text-xl font-bold p-3">
+    <h3 class="mb-5">Olá, {{ user.name }}</h3>
+
+    <div class="flex justify-between w-full gap-5">
+      <p-card header="Produtos Vendidos">
+        <p class="m-0"></p>
+      </p-card>
+      <p-card header="Faturamento">
+        <p class="m-0"></p>
+      </p-card>
+      <p-card header="Clientes">
+        <p class="m-0"></p>
+      </p-card>
+    </div>
+  </div>
 </div>

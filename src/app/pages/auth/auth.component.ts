@@ -55,7 +55,11 @@ export class AuthComponent {
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (response) => {
           localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('user', response.user.id);
+          const userCredencials = {
+            id: response.user.id,
+            name: response.user.name,
+          };
+          localStorage.setItem('user', JSON.stringify(userCredencials));
 
           this.utilsService.presentToast(
             'success',

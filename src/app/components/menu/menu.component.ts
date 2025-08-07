@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class MenuComponent {
   itemsMenu: MenuItem[] = [];
 
-     constructor(private router: Router) {}
+    constructor(private router: Router) {}
 
   ngOnInit() {
     this.itemsMenu = [

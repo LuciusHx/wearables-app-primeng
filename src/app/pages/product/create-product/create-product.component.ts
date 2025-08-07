@@ -13,7 +13,7 @@ import { FormProductComponent } from '../form-product/form-product.component';
 export class CreateProductComponent {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', []),
     price: new FormControl('', [Validators.required]),
     discount: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),

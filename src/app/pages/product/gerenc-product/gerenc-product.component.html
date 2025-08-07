@@ -25,7 +25,12 @@
 
     <div *ngIf="!loading && products.length === 0" class="p-4 text-center">
       <p>Nenhum produto encontrado.</p>
-      <button pButton label="Recarregar" (click)="loadProducts()"></button>
+      <button
+        pButton
+        label="Recarregar"
+        (click)="loadProducts()"
+        severity="contrast"
+      ></button>
     </div>
   </section>
 </div>
